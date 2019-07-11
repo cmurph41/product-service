@@ -48,7 +48,7 @@ public class ProductController {
 				.map(product -> {
 					product.setCategory(newProduct.getCategory());
 					product.setRank(newProduct.getRank());
-					product.setDimension(newProduct.getDimension());
+					product.setDimensions(newProduct.getDimensions());
 					return productRepo.save(product);
 
 				}).orElseGet(()->{

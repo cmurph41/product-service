@@ -2,6 +2,7 @@ package com.jungle.scout.product;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,13 +17,18 @@ public class Product {
 	private String ASIN;
 	private String category;
 	private Integer rank;
-	private Double dimension;
+
+	@ElementCollection(targetClass=Double.class)
+	private List<Double> dimensions;
 
 	Product() {}
-	Product (String ASIN, String category, Integer rank, Double dimension) {
+	Product (String ASIN, String category, Integer rank, List<Double> dimensions) {
 		this.ASIN = ASIN;
 		this.category = category;
 		this.rank = rank;
-		this.dimension = dimension;
+		this.dimensions = dimensions;
 	}
 }
+
+
+
