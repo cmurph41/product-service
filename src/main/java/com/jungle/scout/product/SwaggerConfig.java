@@ -16,6 +16,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket aip() {
 		return new Docket(DocumentationType.SWAGGER_2)
+				.host("//cmurph41-jungle-scout.us-east-2.elasticbeanstalk.com")
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
