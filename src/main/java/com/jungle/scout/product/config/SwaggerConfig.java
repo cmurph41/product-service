@@ -1,4 +1,4 @@
-package com.jungle.scout.product;
+package com.jungle.scout.product.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

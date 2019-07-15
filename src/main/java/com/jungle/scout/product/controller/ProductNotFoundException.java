@@ -1,4 +1,4 @@
-package com.jungle.scout.product;
+package com.jungle.scout.product.controller;
 
 public class ProductNotFoundException extends RuntimeException {
 	/**
