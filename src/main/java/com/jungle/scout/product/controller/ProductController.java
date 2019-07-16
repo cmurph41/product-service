@@ -1,6 +1,7 @@
 package com.jungle.scout.product.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,12 +50,26 @@ public class ProductController {
 		return jsProductRepo.save(newProduct);
 	}
 	
-	//Single Item
 	@CrossOrigin//(origins = "http://cmurph41-jungle-scout.s3-website.us-east-2.amazonaws.com", maxAge = 3600)
 	@GetMapping("/js-products/{id}") 
-	List<JsProduct> jsOne(@PathVariable String id){
-		return jsProductRepo.findAndInsertIfNotThere(id);
+	JsProduct jsOne(@PathVariable String id){
+		Optional<JsProduct> jsProduct = jsProductRepo.findById(id);
+		
+		if(!jsProduct.isPresent()) {
+			Optional<AmzProduct> amzProduct = amzProductRepo.findById(id);
+			if(amzProduct.isPresent()) {
+				JsProduct newJsProduct = new JsProduct(
+						amzProduct.get().getASIN(), 
+						amzProduct.get().getCategory(), 
+						amzProduct.get().getRank(),
+						amzProduct.get().getDimensions());
+				jsProductRepo.save(newJsProduct);
+				return newJsProduct;
+			}
+		}
+		return jsProduct.orElseThrow(() -> new ProductNotFoundException(id));
 	}
+	
 	//Single Item
 	@CrossOrigin//(origins = "http://cmurph41-jungle-scout.s3-website.us-east-2.amazonaws.com", maxAge = 3600)
 	@GetMapping("/amz-products/{id}") 

@@ -18,7 +18,7 @@ public class JsProduct  {
 	private String dimensions;
 
 	JsProduct() {}
-	JsProduct (String ASIN, String category, Integer rank,String dimensions) {
+	public JsProduct (String ASIN, String category, Integer rank,String dimensions) {
 		this.ASIN = ASIN;
 		this.category = category;
 		this.rank = rank;

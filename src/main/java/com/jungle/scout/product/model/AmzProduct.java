@@ -11,6 +11,7 @@ import lombok.Data;
 @Table(name="amz_products")
 public class AmzProduct {
 	
+	
 	@Id
 	private String ASIN;
 	private String category;
